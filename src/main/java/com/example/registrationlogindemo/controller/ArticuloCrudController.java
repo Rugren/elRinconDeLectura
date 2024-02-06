@@ -48,7 +48,9 @@ public class ArticuloCrudController {
     }
 
     /* asi es como estaba: (supuestamente hay que editar aquí
-    para que nos guarde al modificar y no nos cree otro articulo (creo que es con el .save) */
+    para que nos guarde al modificar y no nos cree otro articulo (creo que es con el .save)
+    Seguramente sea por el findByEmail que no coge bien para editar los artículos *ARREGLAR
+    */
     @PostMapping("/modificar/submit")
     public String guardarModificaciones(@ModelAttribute Articulo articulo, Authentication authentication){
         articulo.setUser(userService.findByEmail(authentication.getName()));
