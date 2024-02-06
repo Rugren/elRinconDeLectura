@@ -26,31 +26,53 @@
         </div>
     </div>
 
+    <br/>
+    <br/>
     <h3>Enlaces útiles y Ediciones </h3>
+
+    <!--
     <div class="col col-2">
         <a th:href=" '/index'">Listado Articulos (Inicio del Blog elRinconDeLectura)</a>
     </div>
-    <div class="col col-2">
-        <a th:href=" '/articulos-creados'">¡Todos los Articulos creados por nuestros usuarios!</a>
-    </div>
-    <div class="col col-2">
-        <a th:href=" '/crud/articulos'">Formulario de Edición de Articulos (CRUD)</a>
-    </div>
-    <div class="col col-2">
-        <a th:href=" '/crud/articulos/altas'">Formulario Creación de Articulos</a>
-    </div>
+    Funcionan los enlaces con th:href="@{/crud/articulos}" y th:href=" '/crud/articulos'"
+    -->
+    <br/>
 
-    <div class="col col-2">
-        <a th:href=" '/users'">Todos nuestros usuarios</a>
+    <div>
+        <a th:href="@{/index}" class="btn btn-primary">Inicio del Blog elRinconDeLectura</a>
     </div>
+    <br/>
 
-    <div class="col col-2">
-        <a th:href=" '/register'">¡Únete a nuestra comunidad! Regístrate si aún no lo has hecho</a>
+    <div>
+        <a th:href=" '/articulos-creados'" class="btn btn-primary">¡Todos los Articulos creados por nuestros usuarios!</a>
     </div>
+    <br/>
 
-    <div class="col col-2">
-        <a th:href=" '/login'">Si ya estás registrado, inicia sesión aquí.</a>
+    <div>
+        <a th:href="@{/crud/articulos}" class="btn btn-primary"> Formulario de Edición de Articulos (CRUD)</a>
     </div>
+    <br/>
+
+    <div>
+        <a th:href="@{/crud/articulos/altas}" class="btn btn-primary">Formulario Creación de Articulos</a>
+    </div>
+    <br/>
+
+    <div>
+        <a th:href="@{/users}" class="btn btn-primary">Todos nuestros usuarios</a>
+    </div>
+    <br/>
+    <br/>
+
+    <div>
+        <a th:href="@{/register}" class="btn btn-primary">¡Únete a nuestra comunidad! Regístrate si aún no lo has hecho</a>
+    </div>
+    <br/>
+
+    <div>
+        <a th:href="@{/login}" class="btn btn-primary">Si ya estás registrado, inicia sesión aquí.</a>
+    </div>
+    <br/>
 
 </body>
 </html>
