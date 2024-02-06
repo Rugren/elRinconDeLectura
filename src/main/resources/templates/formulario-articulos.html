@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de artículos</title>
+</head>
+<body>
+
+<h1>Formulario de artículos</h1>
+
+<form th:action="@{${articulo.id != null ? '/crud/articulos/modificar/submit' : '/crud/articulos/altas/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
+    <div class="mb-3">
+        <label for="id" class="form-label">Id</label>
+        <input type="number" class="form-control" id="id" name="id" th:field="*{id}" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" th:field="*{titulo}">
+    </div>
+    <div class="mb-3">
+        <label for="contenido" class="form-label">Contenido</label>
+        <textarea class="form-control" id="contenido" name="contenido" rows="10" th:field="*{contenido}"></textarea>
+    </div>
+    <!--<div class="mb-3">
+        <label for="imagen" class="form-label">Imagen</label>
+        <input type="file" class="form-control" id="imagen" name="imagen">
+    </div>-->
+    <div class="mb-3">
+        <label for="categoria" class="form-label">Categoría</label>
+        <input type="text" class="form-control" id="categoria" th:field="*{categoria}">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/index" class="btn btn-primary">Volver al inicio</a>
+
+</form>
+
+<!-- no va ni con "/", ni con "/index", ni con "/index/"
+<div class="col col-2">
+    <a th:href="/">Volver al inicio</a>
+</div>
+-->
+
+</body>
+</html>
