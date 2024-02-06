@@ -47,10 +47,6 @@ public class ArticuloCrudController {
         return "formulario-articulos";
     }
 
-    /* asi es como estaba: (supuestamente hay que editar aquí
-    para que nos guarde al modificar y no nos cree otro articulo (creo que es con el .save)
-    Seguramente sea por el findByEmail que no coge bien para editar los artículos *ARREGLAR
-    */
     @PostMapping("/modificar/submit")
     public String guardarModificaciones(@ModelAttribute Articulo articulo, Authentication authentication){
         articulo.setUser(userService.findByEmail(authentication.getName()));
@@ -58,7 +54,30 @@ public class ArticuloCrudController {
         return "redirect:/crud/articulos";
     }
 
+    /* Esto buscado en Internet, pero cuando creo o modifico artículos no me deja avanzar
+    @GetMapping("/modificar/{id}")
+    public String modificarArticulos(@PathVariable("id") long id, Model model){
+        Articulo articuloExistente = articuloService.findById(id);
+        model.addAttribute("articulo", articuloExistente);
+        return "formulario-articulos";
+    }
+    @PostMapping("/modificar/submit")
+    public String guardarModificaciones(@ModelAttribute Articulo articuloModificado, Authentication authentication){
+        Articulo articuloExistente = articuloService.findById(articuloModificado.getId());
+        articuloExistente.setTitulo(articuloModificado.getTitulo());
+        articuloExistente.setContenido(articuloModificado.getContenido());
+        // Aquí puedes actualizar otros campos si es necesario
+
+        articuloExistente.setUser(userService.findByEmail(authentication.getName()));
+        articuloService.save(articuloExistente);
+        return "redirect:/crud/articulos";
+    } */
+
     /* aquí editando, cambiar el findByEmail por alguno que exista, o crearlo.
+    asi es como estaba: (supuestamente hay que editar aquí
+    para que nos guarde al modificar y no nos cree otro articulo (creo que es con el .save)
+    Seguramente sea por el findByEmail que no coge bien para editar los artículos *ARREGLAR
+
     @PostMapping("/modificar/submit")
     public String guardarModificaciones(@ModelAttribute Articulo articulo, Authentication authentication){
         articulo.setUser(articuloService.findById(authentication.getName()));

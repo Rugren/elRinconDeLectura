@@ -28,7 +28,7 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
+                        authorize.requestMatchers("/register/**").permitAll() // Los dos asteriscos permiten ver t0do lo que hay detrás de register/LoQueSea
                                 .requestMatchers("/index", "/", "/inicio", "/home").permitAll()
                                 .requestMatchers("/detalle/**").permitAll()
                                 .requestMatchers("/crud/articulos").authenticated()
@@ -37,13 +37,18 @@ public class SpringSecurity {
                                 // .requestMatchers("/crud/articulos/modificar").authenticated() // estaba mal, corregido en la siguiente línea: con /** (copia de nuevo) /{id} (también copia de nuevo)
                                 .requestMatchers("/crud/articulos/modificar/{id}").authenticated()
                                 .requestMatchers("/crud/articulos/modificar/submit").authenticated() // con /modificar/{id}/submit") tampoco va, me sigue creado otro al modificarlo.
-                                .requestMatchers("/crud/articulos/eliminar/{id}").authenticated() // añadido el borrar (no estaba hecho).
+
+                                // añadido el borrar (no estaba hecho, no se podían borrar los post, no accedía).
+                                .requestMatchers("/crud/articulos/eliminar/{id}").authenticated()
+
+                                .requestMatchers("/articulos-creados/**").authenticated()
+
                                 .requestMatchers("/users").hasRole("ADMIN")
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                // (estaba esta ruta mal, que nos mandaba a usuarios cuando nos registrábamos
+                                // Estaba esta ruta mal, que nos mandaba a /users cuando nos registrábamos (corregido a "/index")
                                 // .defaultSuccessUrl("/users")
                                 .defaultSuccessUrl("/index")
                                 .permitAll()
