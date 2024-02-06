@@ -25,4 +25,12 @@ public class HomeController {
         return "detalle";
     }
 
+    // para poder acceder a articulos-creados también tengo que hacer esto:
+    @GetMapping("/articulos-creados")
+    public String articulosCreados(Model model){
+        model.addAttribute("LosArticulosCreados", articuloService.findAll());
+        return "articulos-creados";
+    }
+
+
 }
