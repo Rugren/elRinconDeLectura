@@ -10,8 +10,12 @@
 </head>
 <body>
 
+<br/>
+
 <h1>Bienvenido al Blog elRinconDeLectura</h1>
-<h2>Aquí podrás encontrar todos los artículos creados (y por crear) de nuestros usuarios</h2>
+<br/>
+
+<h4>Aquí podrás encontrar todos los artículos creados (y por crear) de nuestros usuarios</h4>
 <div class="container">
   <div class="row" th:each="articulo:${listaArticulos}">
     <div class="col col-8" th:text="${articulo.titulo}">
@@ -26,18 +30,29 @@
   </div>
 </div>
 
-<div class="col col-2">
-  <a th:href=" '/crud/articulos/altas'">Crea tu propio Artículo</a>
-</div>
 
-<div class="col col-2">
-  <a th:href=" '/crud/articulos'">Edita tus Artículos - Formulario de Edición de Articulos (CRUD)</a>
+<br/>
+
+<div>
+  <a th:href="@{/index}" class="btn btn-primary">Inicio del Blog elRinconDeLectura</a>
 </div>
+<br/>
 
 
-<div class="col col-2">
-  <a th:href=" '/users'">Encuentra a los demás usuarios</a>
+<div>
+  <a th:href="@{/crud/articulos/altas}" class="btn btn-primary">Crea tu propio Artículo</a>
 </div>
+<br/>
+
+<div>
+  <a th:href="@{/crud/articulos}" class="btn btn-primary"> Edita tus Artículos - Formulario de Edición de Articulos (CRUD)</a>
+</div>
+<br/>
+
+<div>
+  <a th:href="@{/users}" class="btn btn-primary">Encuentra a los demás usuarios</a>
+</div>
+<br/>
 
 
 </body>
