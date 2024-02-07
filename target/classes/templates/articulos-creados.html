@@ -35,24 +35,37 @@
 <h1>Bienvenido al Blog elRinconDeLectura</h1>
 <br/>
 
-<h4>Aquí podrás encontrar todos los artículos creados (y por crear) de nuestros usuarios</h4>
+<h4>Aquí podrás encontrar todos los artículos creados (y por crear) de nuestros usuarios.</h4>
+<p>¡Anímate y crea un artículo tú mismo!
+<a th:href="@{/crud/articulos/altas}" class="btn btn-primary">Crea tu propio Artículo</a>
+</p>
+
 <div class="container">
+
+  <u><h4>Título de los artículos</h4></u>
+
+    <br/>
 
   <!-- Cambiado el listaArticulos por losArticulosCreados (ver ambos en el HomeController y darme cuenta) -->
   <div class="row" th:each="articulo:${losArticulosCreados}">
+
+    <strong>
     <div class="col col-8" th:text="${articulo.titulo}">
-      Título del artículo
       <a th:href=" '/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
     </div>
-    <div class="col col-2" th:text="${articulo.fecha}">
-    </div>
+    <strong>
+
+    <p class="col col-2" th:text="${articulo.fecha}">
+    </p>
 
     <div>
       <p><img th:src="${articulo.imagen}"></p>
     </div>
 
+    <!-- <br/> -->
+
     <div class="col col-2">
-      <a th:href=" '/detalle/' + ${articulo.id}">Ampliar</a>
+      <a th:href=" '/detalle/' + ${articulo.id}">Ver más</a>
     </div>
   </div>
 </div>
