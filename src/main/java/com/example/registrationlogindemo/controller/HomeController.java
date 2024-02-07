@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -68,6 +69,18 @@ public class HomeController {
         // (Para mostrar los comentarios) Cogemos la lista de comentarios asociados al ID del artículo (Sin esto no podemos mostrar los comentarios)
         List<Comentario> listadoComentario = comentarioService.findByArticulo(articulo);
         model.addAttribute("listadoComentario", listadoComentario);
+
+
+        // Para mostrar los NOMBRES Y APELLIDOS de los usuarios: Almacenamos en una lista para los nombres de usuario
+        // el nombreYApellidos poner bien en detalle.html
+        List<String> nombreYApellidos = new ArrayList<>();
+        // Para cada comentario, cogemos el nombre del usuario que lo creó y lo agrega a la lista
+        for (Comentario comentario : listadoComentario) { // el listadoComentario es el de antes (Para mostrar los comentarios)
+            String nombreUsuario = comentario.getAutor().getName(); // Obtenemos el nombre del usuario asociado al comentario
+            nombreYApellidos.add(nombreUsuario); // Agregar el nombre del usuario a la lista
+        }
+        // Agregar el ArrayListla de lista de nombres de usuario al modelo
+        model.addAttribute("nombreYApellidos", nombreYApellidos);
 
 
         // Devuelve la vista "detalle"

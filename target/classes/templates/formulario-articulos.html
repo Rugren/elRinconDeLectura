@@ -51,8 +51,6 @@
     <form th:action="@{${articulo.id == 0 ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
         <!-- <div class="contenedorFormularioArticulos"> div contenedorFormularioArticulos del formulario añadido, para que nos coja un margen para t0do -->
 
-        <!-- <div class="contenidoFormularioArticulos" p-5 10px>  div del contenidoFormularioArticulos (no funcionaba el padding-5 y 10 px -->
-
             <div class="mb-3">
                 <label for="id" class="form-label">Id</label>
                 <!-- <input type="number" class="form-control" id="id" name="id" th:field="*{id}">
@@ -60,7 +58,6 @@
                 <input type="hidden" id="id" name="id" th:field="*{id}">
 
             </div>
-
 
         <div class="mb-3">
             <label for="titulo" class="form-label">Título</label>
