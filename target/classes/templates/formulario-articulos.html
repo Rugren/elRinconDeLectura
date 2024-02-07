@@ -48,10 +48,14 @@
 <!-- Con 0 y null es lo mismo -->
 <!-- <form th:action="@{${articulo.id != null ? '/crud/articulos/modificar/submit' : '/crud/articulos/altas/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}"> -->
 <!--<form th:action="@{${articulo.id = null ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}"> -->
-    <form th:action="@{${articulo.id == 0 ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
-        <!-- <div class="contenedorFormularioArticulos"> div contenedorFormularioArticulos del formulario añadido, para que nos coja un margen para t0do -->
 
-            <div class="mb-3">
+        <!-- Arreglar esto, es para que no machaque una imagen con otra al crear un artículo
+        <form th:action="@{${articulo.id == 0 ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
+        -->
+
+<form th:action="@{${articulo.id == 0 ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
+
+<div class="mb-3">
                 <label for="id" class="form-label">Id</label>
                 <!-- <input type="number" class="form-control" id="id" name="id" th:field="*{id}">
                 Modificada a la siguiente línea  -->
@@ -87,9 +91,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a href="/index" class="btn btn-primary">Volver al inicio</a>
-
-        <!-- </div> fin del div del contenidoFormularioArticulos -->
-    <!-- </div> fin del div contenedorFormularioArticulos del formulario añadido, para que nos coja un margen para t0do -->
 
 </form>
 
