@@ -27,6 +27,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
                 </li>
             </ul>
+
         </div>
     </div>
 </nav>
@@ -41,6 +42,7 @@
             </div>
             <div class="col col-2" th:text="${articulo.fecha}">
             </div>
+
             <div class="col col-2">
                 <a th:href=" '/detalle/' + ${articulo.id}">Ampliar</a>
             </div>

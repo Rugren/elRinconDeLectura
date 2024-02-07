@@ -3,6 +3,7 @@ package com.example.registrationlogindemo.controller;
 import com.example.registrationlogindemo.entity.Articulo;
 import com.example.registrationlogindemo.service.ArticuloService;
 import com.example.registrationlogindemo.service.UserService;
+import com.example.registrationlogindemo.storage.StorageService;
 import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.util.Collections;
 
@@ -20,6 +23,9 @@ public class ArticuloCrudController {
     ArticuloService articuloService;
     @Autowired
     UserService userService;
+    @Autowired
+    StorageService storageService;
+
 
     @GetMapping
     public String mostrarListadoArticulos(Model model){
@@ -35,11 +41,39 @@ public class ArticuloCrudController {
         return "formulario-articulos";
     }
 
+    /* así sin las imágenes
     @PostMapping("/altas/submit")
     public String guardarDatosFormulario(@ModelAttribute Articulo articulo){
         articuloService.save(articulo);
         return "redirect:/crud/articulos/altas";
     }
+    */
+    /* @PostMapping("/altas/submit")
+    public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
+        if(!file.isEmpty()){
+            String imagen = storageService.store(file, String.valueOf(articulo.getId()));
+            System.out.println("La img a guardar es: "+ imagen);
+            articulo.setImagen(MvcUriComponentsBuilder
+                    .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
+        }
+        articuloService.save(articulo);
+        return "redirect:/crud/articulos/altas";
+
+        cambiado el (articulo.getId())); por getTitulo
+    } */
+
+    @PostMapping("/altas/submit")
+    public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
+        if(!file.isEmpty()){
+            String imagen = storageService.store(file, String.valueOf(articulo.getTitulo()));
+            System.out.println("La img a guardar es: "+ imagen);
+            articulo.setImagen(MvcUriComponentsBuilder
+                    .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
+        }
+        articuloService.save(articulo);
+        return "redirect:/crud/articulos/altas";
+    }
+
 
     @GetMapping("/modificar/{id}")
     public String modificarArticulos(@PathVariable("id") long id, Model model){

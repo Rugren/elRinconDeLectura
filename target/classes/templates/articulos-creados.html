@@ -37,13 +37,20 @@
 
 <h4>Aquí podrás encontrar todos los artículos creados (y por crear) de nuestros usuarios</h4>
 <div class="container">
-  <div class="row" th:each="articulo:${listaArticulos}">
+
+  <!-- Cambiado el listaArticulos por losArticulosCreados (ver ambos en el HomeController y darme cuenta) -->
+  <div class="row" th:each="articulo:${losArticulosCreados}">
     <div class="col col-8" th:text="${articulo.titulo}">
       Título del artículo
       <a th:href=" '/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
     </div>
     <div class="col col-2" th:text="${articulo.fecha}">
     </div>
+
+    <div>
+      <p><img th:src="${articulo.imagen}"></p>
+    </div>
+
     <div class="col col-2">
       <a th:href=" '/detalle/' + ${articulo.id}">Ampliar</a>
     </div>

@@ -28,6 +28,15 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
                 </li>
             </ul>
+
+            <!--
+            <div> si lo pongo aquí no va, tendría que dar permisos en HomeController
+                Usuario:
+                <div th:text="${user.name}">
+                </div>
+            </div>
+            -->
+
         </div>
     </div>
 </nav>
@@ -36,9 +45,10 @@
 <h1>Formulario de artículos</h1>
 
 
-    <!-- Con 0 y null es lo mismo -->
-<form th:action="@{${articulo.id != 0 ? '/crud/articulos/modificar/submit' : '/crud/articulos/altas/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
+<!-- Con 0 y null es lo mismo -->
 <!-- <form th:action="@{${articulo.id != null ? '/crud/articulos/modificar/submit' : '/crud/articulos/altas/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}"> -->
+<form th:action="@{${articulo.id != null ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" method="post" enctype="multipart/form-data" th:object="${articulo}">
+
     <!-- <div class="contenedorFormularioArticulos"> div contenedorFormularioArticulos del formulario añadido, para que nos coja un margen para t0do -->
 
         <!-- <div class="contenidoFormularioArticulos" p-5 10px>  div del contenidoFormularioArticulos (no funcionaba el padding-5 y 10 px-->
@@ -54,10 +64,17 @@
         <label for="contenido" class="form-label">Contenido</label>
         <textarea class="form-control" id="contenido" name="contenido" rows="10" th:field="*{contenido}"></textarea>
     </div>
-    <!--<div class="mb-3">
+    <!-- lo de las imágenes
+    <div class="mb-3">
         <label for="imagen" class="form-label">Imagen</label>
         <input type="file" class="form-control" id="imagen" name="imagen">
+        cambiar el name="imagen" por file
     </div>-->
+    <div class="mb-3">
+        <label for="imagen" class="form-label">Imagen</label>
+        <input type="file" class="form-control" id="imagen" name="file">
+    </div>
+
     <div class="mb-3">
         <label for="categoria" class="form-label">Categoría</label>
         <input type="text" class="form-control" id="categoria" th:field="*{categoria}">

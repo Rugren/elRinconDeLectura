@@ -21,16 +21,17 @@ public class HomeController {
     @GetMapping("/detalle/{id}")
     public String detalle(@PathVariable long id, Model model){
         model.addAttribute("articulo", articuloService.findById(id));
-        //model.addAttribute("comentario", new Comentario)
+        // model.addAttribute("comentario", new Comentario)
         return "detalle";
     }
 
     // para poder acceder a articulos-creados también tengo que hacer esto:
     @GetMapping("/articulos-creados")
     public String articulosCreados(Model model){
-        model.addAttribute("LosArticulosCreados", articuloService.findAll());
+        model.addAttribute("losArticulosCreados", articuloService.findAll());
         return "articulos-creados";
     }
+
 
 
 }

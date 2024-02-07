@@ -43,6 +43,10 @@ public class SpringSecurity {
 
                                 .requestMatchers("/articulos-creados/**").authenticated()
 
+                                // Añadido esto para las imágenes
+                                // .requestMatchers("/files/**").authenticated() puesto el .permitAll() porque sino en el inicio no pueden ver las imágenes, solo si estás logeado.
+                                .requestMatchers("/files/**").permitAll()
+
                                 .requestMatchers("/users").hasRole("ADMIN")
                 ).formLogin(
                         form -> form

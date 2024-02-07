@@ -36,6 +36,11 @@
 <div class="container">
   <h1 th:text="${articulo.titulo}"></h1>
   <p th:text="${articulo.contenido}"></p>
+  <p th:text="${articulo.fecha}"></p>
+
+  <div>
+    <p><img th:src="${articulo.imagen}"></p>
+  </div>
 
   <form th:action=" '/comentario/altas/' + ${articulo.id}" method="post" th:object="${comentario}">
     <textarea></textarea>
