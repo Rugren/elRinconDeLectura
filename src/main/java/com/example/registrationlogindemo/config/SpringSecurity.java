@@ -31,15 +31,18 @@ public class SpringSecurity {
                         authorize.requestMatchers("/register/**").permitAll() // Los dos asteriscos permiten ver t0do lo que hay detrás de register/LoQueSea
                                 .requestMatchers("/index", "/", "/inicio", "/home").permitAll()
                                 .requestMatchers("/detalle/**").permitAll()
+                                .requestMatchers("/detalle/submit").permitAll()
+
                                 .requestMatchers("/crud/articulos").authenticated()
                                 .requestMatchers("/crud/articulos/altas").authenticated()
                                 .requestMatchers("/crud/articulos/altas/submit").authenticated()
-                                // .requestMatchers("/crud/articulos/modificar").authenticated() // estaba mal, corregido en la siguiente línea: con /** (copia de nuevo) /{id} (también copia de nuevo)
-                                .requestMatchers("/crud/articulos/modificar/{id}").authenticated()
-                                .requestMatchers("/crud/articulos/modificar/submit").authenticated() // con /modificar/{id}/submit") tampoco va, me sigue creado otro al modificarlo.
+
+                                // .requestMatchers("/crud/articulos/modificar").authenticated() // estaba mal, corregido en la siguiente línea: con /** lo hace bien, mejor que /{id}
+                                .requestMatchers("/crud/articulos/modificar/**").authenticated()
+                                .requestMatchers("/crud/articulos/modificar/submit").authenticated()
 
                                 // añadido el borrar (no estaba hecho, no se podían borrar los post, no accedía).
-                                .requestMatchers("/crud/articulos/eliminar/{id}").authenticated()
+                                .requestMatchers("/crud/articulos/eliminar/**").authenticated()
 
                                 .requestMatchers("/articulos-creados/**").authenticated()
 

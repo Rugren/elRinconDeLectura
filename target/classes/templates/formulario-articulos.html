@@ -47,31 +47,40 @@
 
 <!-- Con 0 y null es lo mismo -->
 <!-- <form th:action="@{${articulo.id != null ? '/crud/articulos/modificar/submit' : '/crud/articulos/altas/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}"> -->
-<form th:action="@{${articulo.id != null ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" method="post" enctype="multipart/form-data" th:object="${articulo}">
+<!--<form th:action="@{${articulo.id = null ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}"> -->
+    <form th:action="@{${articulo.id == 0 ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
+        <!-- <div class="contenedorFormularioArticulos"> div contenedorFormularioArticulos del formulario añadido, para que nos coja un margen para t0do -->
 
-    <!-- <div class="contenedorFormularioArticulos"> div contenedorFormularioArticulos del formulario añadido, para que nos coja un margen para t0do -->
+        <!-- <div class="contenidoFormularioArticulos" p-5 10px>  div del contenidoFormularioArticulos (no funcionaba el padding-5 y 10 px -->
 
-        <!-- <div class="contenidoFormularioArticulos" p-5 10px>  div del contenidoFormularioArticulos (no funcionaba el padding-5 y 10 px-->
-    <div class="mb-3">
-        <label for="id" class="form-label">Id</label>
-        <input type="number" class="form-control" id="id" name="id" th:field="*{id}" disabled>
-    </div>
-    <div class="mb-3">
-        <label for="titulo" class="form-label">Título</label>
-        <input type="text" class="form-control" id="titulo" name="titulo" th:field="*{titulo}">
-    </div>
-    <div class="mb-3">
-        <label for="contenido" class="form-label">Contenido</label>
-        <textarea class="form-control" id="contenido" name="contenido" rows="10" th:field="*{contenido}"></textarea>
-    </div>
-    <!-- lo de las imágenes
-    <div class="mb-3">
+            <div class="mb-3">
+                <label for="id" class="form-label">Id</label>
+                <!-- <input type="number" class="form-control" id="id" name="id" th:field="*{id}">
+                Modificada a la siguiente línea  -->
+                <input type="hidden" id="id" name="id" th:field="*{id}">
+
+            </div>
+
+
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" th:field="*{titulo}">
+        </div>
+        <div class="mb-3">
+            <label for="contenido" class="form-label">Contenido</label>
+            <textarea class="form-control" id="contenido" name="contenido" rows="10" th:field="*{contenido}"></textarea>
+        </div>
+        <!-- lo de las imágenes
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="imagen" name="imagen">
+            cambiado el name="imagen" por file
+        </div>-->
+
+        <input type="hidden" id="imagen" name="imagen" th:field="*{imagen}"> <!-- Este input para que sepa que tenemos una imagen, sin esto no nos coge la imagen -->
+        <div class="mb-3">
         <label for="imagen" class="form-label">Imagen</label>
-        <input type="file" class="form-control" id="imagen" name="imagen">
-        cambiado el name="imagen" por file
-    </div>-->
-    <div class="mb-3">
-        <label for="imagen" class="form-label">Imagen</label>
+            <!-- En type= y name= no poner imagen, poner file para que coja el archivo de la imagen -->
         <input type="file" class="form-control" id="imagen" name="file">
     </div>
 
@@ -86,12 +95,6 @@
     <!-- </div> fin del div contenedorFormularioArticulos del formulario añadido, para que nos coja un margen para t0do -->
 
 </form>
-
-<!-- no va ni con "/", ni con "/index", ni con "/index/"
-<div class="col col-2">
-    <a th:href="/">Volver al inicio</a>
-</div>
--->
 
 </body>
 </html>

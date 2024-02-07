@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collections;
 
 @Controller
@@ -48,25 +50,31 @@ public class ArticuloCrudController {
         return "redirect:/crud/articulos/altas";
     }
     */
-    /* @PostMapping("/altas/submit")
+    /* Así como lo tenía antes de las 14:30 07/02/2024
+    @PostMapping("/altas/submit")
     public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
         if(!file.isEmpty()){
             String imagen = storageService.store(file, String.valueOf(articulo.getId()));
-            System.out.println("La img a guardar es: "+ imagen);
+            System.out.println("La imagen a guardar es: "+ imagen);
             articulo.setImagen(MvcUriComponentsBuilder
                     .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
         }
         articuloService.save(articulo);
         return "redirect:/crud/articulos/altas";
 
-        cambiado el (articulo.getId())); por getTitulo
-    } */
+        // cambiado el (articulo.getId())); por getTitulo:
+        // (después vuelto a poner el getId, ya que eso no influye, es solo para que nos guarde la imagen con el id que es mejor)
+    }
+     */
 
     @PostMapping("/altas/submit")
     public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
+        // Crea solo la fecha con la hora y la hora para el otro campo de la BD. Pero si tengo que ponerlo en /modificar/submit de abajo.
+
+        // esto para que si el archivo está vacío, que nos coja la imagen que teníamos.
         if(!file.isEmpty()){
-            String imagen = storageService.store(file, String.valueOf(articulo.getTitulo()));
-            System.out.println("La img a guardar es: "+ imagen);
+            String imagen = storageService.store(file, String.valueOf(articulo.getId()));
+            System.out.println("La imagen a guardar es: "+ imagen);
             articulo.setImagen(MvcUriComponentsBuilder
                     .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
         }
@@ -81,9 +89,33 @@ public class ArticuloCrudController {
         return "formulario-articulos";
     }
 
+    /* Sin las imágenes
     @PostMapping("/modificar/submit")
     public String guardarModificaciones(@ModelAttribute Articulo articulo, Authentication authentication){
         articulo.setUser(userService.findByEmail(authentication.getName()));
+        articulo.setFecha(LocalDateTime.now());
+
+        // articulo.setFecha(toLocalTime()); o esto: articulo.setHora(toLocalTime());
+        // no probado, probar (debería dar la hora, ver cuando cree un artículo, en la bd si me ha creado la hora.)
+
+        articuloService.save(articulo);
+
+        return "redirect:/crud/articulos";
+    } */
+
+    /* Con las imágenes */
+    @PostMapping("/modificar/submit")
+    public String guardarModificaciones(@ModelAttribute Articulo articulo, Authentication authentication, @RequestParam("file") MultipartFile file){
+        articulo.setUser(userService.findByEmail(authentication.getName()));
+        articulo.setFecha(LocalDateTime.now()); // Con esto modificamos la fecha y la hora y la guarda en la BD.
+        articulo.setHora(LocalTime.now()); // Con esto modificamos solo la hora y la guarda en la BD. (Tenemos en la BD otro campo con hora)
+
+        if (!file.isEmpty()) {
+            String imagen = storageService.store(file, String.valueOf(articulo.getId()));
+            System.out.println("La imagen a guardar es : " + imagen);
+            articulo.setImagen(MvcUriComponentsBuilder
+                    .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
+        }
         articuloService.save(articulo);
         return "redirect:/crud/articulos";
     }
@@ -100,26 +132,15 @@ public class ArticuloCrudController {
         Articulo articuloExistente = articuloService.findById(articuloModificado.getId());
         articuloExistente.setTitulo(articuloModificado.getTitulo());
         articuloExistente.setContenido(articuloModificado.getContenido());
-        // Aquí puedes actualizar otros campos si es necesario
+        // Y otros campos a actualizar si los tuviésemos
 
         articuloExistente.setUser(userService.findByEmail(authentication.getName()));
         articuloService.save(articuloExistente);
         return "redirect:/crud/articulos";
     } */
 
-    /* aquí editando, cambiar el findByEmail por alguno que exista, o crearlo.
-    asi es como estaba: (supuestamente hay que editar aquí
-    para que nos guarde al modificar y no nos cree otro articulo (creo que es con el .save)
-    Seguramente sea por el findByEmail que no coge bien para editar los artículos *ARREGLAR
-
+    /* Otra manera, ejemplo con categorías:
     @PostMapping("/modificar/submit")
-    public String guardarModificaciones(@ModelAttribute Articulo articulo, Authentication authentication){
-        articulo.setUser(articuloService.findById(authentication.getName()));
-        articuloService.save(articulo);
-        return "redirect:/crud/articulos";
-    } */
-
-    /*@PostMapping("/modificar/submit")
     public String guardarModificaciones(@ModelAttribute Producto producto, @RequestParam("categories") Long categoriaId) {
         // Fetch the category from the database
         Category category = categoryService.findById(categoriaId);

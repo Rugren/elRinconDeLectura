@@ -33,14 +33,24 @@
 </nav>
 <br>
 
-    <h1>Bienvenido a mi blog</h1>
+<div class="container">
+    <h1>Bienvenido al Blog elRinconDeLectura ✍</h1>
+    <div/>
+
+    <br/>
+
     <div class="container">
+        <p> <u>Título de los artículos:</u> </p>
         <div class="row" th:each="articulo:${listaArticulos}">
+            <!-- Lo que escriba en esta línea lo hace en bucle. -->
             <div class="col col-8" th:text="${articulo.titulo}">
-                Título del artículo
                 <a th:href=" '/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
             </div>
             <div class="col col-2" th:text="${articulo.fecha}">
+
+                <input type="hidden" id="fecha" name="fecha" th:field="*{fecha}">
+                <!-- <input type="number" id="fecha" name="fecha" th:field="*{fecha}"> -->
+
             </div>
 
             <div class="col col-2">

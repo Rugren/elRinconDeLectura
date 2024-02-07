@@ -32,13 +32,17 @@
 
 <br/>
 
-<h1>Bienvenido al Blog elRinconDeLectura</h1>
+<div class="container">
+<h1>Bienvenido al Blog elRinconDeLectura ✍</h1>
+  <div/>
 <br/>
 
+<div class="container">
 <h4>Aquí podrás encontrar todos los artículos creados (y por crear) de nuestros usuarios.</h4>
 <p>¡Anímate y crea un artículo tú mismo!
 <a th:href="@{/crud/articulos/altas}" class="btn btn-primary">👉 Crea tu propio Artículo</a>
 </p>
+  <div/>
 
 <div class="container">
 
@@ -56,6 +60,7 @@
     <strong>
 
     <p class="col col-2" th:text="${articulo.fecha}">
+      <input type="hidden" id="fecha" name="fecha" th:field="*{fecha}">
     </p>
 
     <div>
