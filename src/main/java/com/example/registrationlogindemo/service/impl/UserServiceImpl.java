@@ -71,4 +71,11 @@ public class UserServiceImpl implements UserService {
         role.setName("ROLE_ADMIN");
         return roleRepository.save(role);
     }
+
+    // Creado método finById para buscar un usuario por su ID (es obligatorio para los comentarios)
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null); // Utiliza el método findById de UserRepository para buscar el usuario por su ID
+    }
+
 }

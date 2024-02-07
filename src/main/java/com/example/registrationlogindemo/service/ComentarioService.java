@@ -30,4 +30,9 @@ public class ComentarioService {
         return comentarioRepository.findByArticulo(articulo);
     }
 
+    // Para guardar los comentarios que nos pongan los usuarios.
+    public Comentario save(Comentario comentario){
+        return comentarioRepository.save(comentario);
+    }
+
 }

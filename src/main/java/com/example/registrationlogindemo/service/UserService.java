@@ -11,4 +11,7 @@ public interface UserService {
     User findByEmail(String email);
 
     List<UserDto> findAllUsers();
+
+    // para los comentarios
+    User findById(Long id);
 }

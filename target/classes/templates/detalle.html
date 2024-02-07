@@ -46,6 +46,25 @@
     <textarea></textarea>
   </form>
 
+  <!-- 1º comprueba si estamos logeados para poder comentar
+  si el usuario está registrado podrá comentar -->
+  <div th:if="${usuarioAutenticado != null}">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Deja un comentario</h5>
+        <form th:action="@{/detalle/submit}" method="post" th:object="${comentario}">
+          <div class="form-group">
+            <label for="contenido">Contenido del comentario</label>
+            <textarea class="form-control" id="contenido" name="contenido" rows="3" th:field="*{contenido}"></textarea>
+          </div>
+          <input type="hidden" id="idArticulo" name="idArticulo" th:value="${articulo.id}">
+          <input type="hidden" id="autorId" name="autorId" th:value="${usuarioAutenticado.id}" />
+          <button type="submit" class="btn btn-primary">Enviar comentario</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
 <div>
   <p><a href="/articulos-creados">Volver atrás</a></p>
   <p><a href="/">Volver a la página principal</a></p>

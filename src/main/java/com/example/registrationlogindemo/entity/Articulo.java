@@ -37,6 +37,7 @@ public class Articulo {
         }
     }
 
+    @Column(columnDefinition = "TEXT")
     private String imagen;
     private String categoria;
 

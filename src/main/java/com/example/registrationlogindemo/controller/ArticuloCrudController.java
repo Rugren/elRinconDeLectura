@@ -52,7 +52,10 @@ public class ArticuloCrudController {
     */
 
     @PostMapping("/altas/submit")
-    public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
+    public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file, Authentication authentication){
+
+        articulo.setUser(userService.findByEmail(authentication.getName())); // puesto esto aquí para que con coja el Id en el nombre cuando creamos un artículo. Y poner Authentication authentication en public String guardarDatosFormulario.
+
         // Crea solo la fecha con la hora y la hora para el otro campo de la BD. Pero si tengo que ponerlo en /modificar/submit de abajo.
 
         System.out.println(file.getOriginalFilename()); // Te dice el nombre original de la img, sale por consola.
@@ -65,7 +68,7 @@ public class ArticuloCrudController {
                     .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
         }
         articuloService.save(articulo);
-        return "redirect:/crud/articulos/altas";
+        return "redirect:/crud/articulos"; // Tenía redirect:/crud/articulos/altas pero dejado para que nos redireccione al panel de crud/articulos mejor.
     }
 
 
