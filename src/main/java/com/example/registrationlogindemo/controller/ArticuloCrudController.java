@@ -55,9 +55,11 @@ public class ArticuloCrudController {
     public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
         // Crea solo la fecha con la hora y la hora para el otro campo de la BD. Pero si tengo que ponerlo en /modificar/submit de abajo.
 
+        System.out.println(file.getOriginalFilename()); // Te dice el nombre original de la img, sale por consola.
         // esto para que si el archivo está vacío, que nos coja la imagen que teníamos.
         if(!file.isEmpty()){
             String imagen = storageService.store(file, String.valueOf(articulo.getId()));
+            System.out.println(file.getOriginalFilename());
             System.out.println("La imagen a guardar es: "+ imagen);
             articulo.setImagen(MvcUriComponentsBuilder
                     .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
