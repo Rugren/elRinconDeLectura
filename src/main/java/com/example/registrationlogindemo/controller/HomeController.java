@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -61,6 +62,14 @@ public class HomeController {
         // Agrega un nuevo comentario al modelo
         model.addAttribute("comentario", new Comentario());
 
+
+        // (Para mostrar los comentarios) Cogemos el artículo por su ID
+        Articulo articulo = articuloService.findById(id);
+        // (Para mostrar los comentarios) Cogemos la lista de comentarios asociados al ID del artículo (Sin esto no podemos mostrar los comentarios)
+        List<Comentario> listadoComentario = comentarioService.findByArticulo(articulo);
+        model.addAttribute("listadoComentario", listadoComentario);
+
+
         // Devuelve la vista "detalle"
         return "detalle";
     }
@@ -81,7 +90,6 @@ public class HomeController {
         // Redirigir a la página de detalle del artículo
         return "redirect:/detalle/" + idArticulo; // Suponiendo que "/detalle/" es el endpoint correcto para la página de detalle
     }
-
 
 
 

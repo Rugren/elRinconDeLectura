@@ -65,6 +65,22 @@
     </div>
   </div>
 
+  <!-- Div hecho para mostrar los comentarios dentro de los artículos -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Comentarios</h5>
+      <!-- Iterar sobre la lista de comentarios -->
+      <div th:each="comentario : ${listadoComentario}">
+        <div class="mb-3">
+          <!-- Mostrar el nombre del usuario que creó el comentario -->
+          <h6 class="card-subtitle mb-2 text-muted" th:text="${comentario.autor}"></h6>
+          <!-- Mostrar el contenido del comentario -->
+          <p class="card-text" th:text="${comentario.contenido}"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div>
   <p><a href="/articulos-creados">Volver atrás</a></p>
   <p><a href="/">Volver a la página principal</a></p>
