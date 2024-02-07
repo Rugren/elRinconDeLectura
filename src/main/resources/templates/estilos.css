@@ -1,0 +1,9 @@
+.contenedorFormularioArticulos {
+  width: 80%; /* Ancho del contenedor para el formulario-articulos */
+  margin: 0 auto; /* Margen automático a los lados, centrando */
+  background-color: #f2f2f2; /* Color de fondo del contenedor */
+}
+
+.contenidoFormularioArticulos {
+  padding: 20px; /* Relleno interior del contenido que pongamos */
+}
