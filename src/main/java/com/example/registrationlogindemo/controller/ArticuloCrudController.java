@@ -50,22 +50,6 @@ public class ArticuloCrudController {
         return "redirect:/crud/articulos/altas";
     }
     */
-    /* Así como lo tenía antes de las 14:30 07/02/2024
-    @PostMapping("/altas/submit")
-    public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
-        if(!file.isEmpty()){
-            String imagen = storageService.store(file, String.valueOf(articulo.getId()));
-            System.out.println("La imagen a guardar es: "+ imagen);
-            articulo.setImagen(MvcUriComponentsBuilder
-                    .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
-        }
-        articuloService.save(articulo);
-        return "redirect:/crud/articulos/altas";
-
-        // cambiado el (articulo.getId())); por getTitulo:
-        // (después vuelto a poner el getId, ya que eso no influye, es solo para que nos guarde la imagen con el id que es mejor)
-    }
-     */
 
     @PostMapping("/altas/submit")
     public String guardarDatosFormulario(@ModelAttribute Articulo articulo, @RequestParam("file") MultipartFile file){
@@ -112,6 +96,8 @@ public class ArticuloCrudController {
 
         if (!file.isEmpty()) {
             String imagen = storageService.store(file, String.valueOf(articulo.getId()));
+            /* En (articulo.getId())) tenía getTitulo y en "/altas/submit" también.
+            Pero dejado .getId para que le de ese nombre a las imágenes en la BD. */
             System.out.println("La imagen a guardar es : " + imagen);
             articulo.setImagen(MvcUriComponentsBuilder
                     .fromMethodName(FileUploadController.class, "serveFile", imagen).build().toUriString());
