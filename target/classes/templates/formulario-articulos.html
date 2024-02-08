@@ -56,12 +56,13 @@
         <form th:action="@{${articulo.id == 0 ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
         -->
 
+<!-- FORMULARIO QUE TENÍA, QUE ME VA (SIN MEJORAR)
 <form th:action="@{${articulo.id == 0 ?  '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}">
 
 <div class="mb-3">
                 <label for="id" class="form-label">Id</label>
-                <!-- <input type="number" class="form-control" id="id" name="id" th:field="*{id}">
-                Modificada a la siguiente línea  -->
+                < !-- <input type="number" class="form-control" id="id" name="id" th:field="*{id}">
+                Modificada a la siguiente línea  -- >
                 <input type="hidden" id="id" name="id" th:field="*{id}">
 
             </div>
@@ -74,17 +75,17 @@
             <label for="contenido" class="form-label">Contenido</label>
             <textarea class="form-control" id="contenido" name="contenido" rows="10" th:field="*{contenido}"></textarea>
         </div>
-        <!-- lo de las imágenes
+        < !-- lo de las imágenes
         <div class="mb-3">
             <label for="imagen" class="form-label">Imagen</label>
             <input type="file" class="form-control" id="imagen" name="imagen">
             cambiado el name="imagen" por file
-        </div>-->
+        </div> -- >
 
-        <input type="hidden" id="imagen" name="imagen" th:field="*{imagen}"> <!-- Este input para que sepa que tenemos una imagen, sin esto no nos coge la imagen -->
+        <input type="hidden" id="imagen" name="imagen" th:field="*{imagen}"> <!-- Este input para que sepa que tenemos una imagen, sin esto no nos coge la imagen - ->
         <div class="mb-3">
         <label for="imagen" class="form-label">Imagen</label>
-            <!-- En type= y name= no poner imagen, poner file para que coja el archivo de la imagen -->
+            < !-- En type= y name= no poner imagen, poner file para que coja el archivo de la imagen -- >
         <input type="file" class="form-control" id="imagen" name="file">
     </div>
 
@@ -93,13 +94,58 @@
         <input type="text" class="form-control" id="categoria" th:field="*{categoria}">
     </div>
 
-    <!-- <button type="submit" class="btn btn-primary">Guardar</button>
-    <a href="/index" class="btn btn-primary">Volver al inicio</a> -->
+    < !-- <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="/index" class="btn btn-primary">Volver al inicio</a> -- >
 
     <button type="submit" class="btn btn-success text-white">Guardar</button>
     <a href="/index" class="btn btn-danger">Volver al inicio</a>
 
 </form>
+-->
+
+<form th:action="@{${articulo.id == 0 ? '/crud/articulos/altas/submit' : '/crud/articulos/modificar/submit'}}" th:method="post" enctype="multipart/form-data" th:object="${articulo}" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="id" class="form-label">Id</label>
+        <input type="hidden" id="id" name="id" th:field="*{id}">
+    </div>
+
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" id="titulo" name="titulo" th:field="*{titulo}" required>
+        <div class="invalid-feedback">
+            Por favor ingrese un título.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="contenido" class="form-label">Contenido</label>
+        <textarea class="form-control" id="contenido" name="contenido" rows="10" th:field="*{contenido}" required></textarea>
+        <div class="invalid-feedback">
+            Por favor ingrese el contenido.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="imagen" class="form-label">Imagen</label>
+        <input type="file" class="form-control" id="imagen" name="file" required>
+        <div class="invalid-feedback">
+            Por favor seleccione una imagen.
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="categoria" class="form-label">Categoría</label>
+        <input type="text" class="form-control" id="categoria" th:field="*{categoria}" required>
+        <div class="invalid-feedback">
+            Por favor ingrese una categoría.
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success text-white">Guardar</button>
+    <a href="/index" class="btn btn-danger">Volver al inicio</a>
+</form>
+
+
 
 <!-- Pie de página -->
 <footer class="text-center text-white text-lg-start bg-brown">
