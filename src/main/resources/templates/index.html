@@ -79,6 +79,7 @@
     </div>
 -->
 
+    <!-- Así mejorado, pero sin poner las Categorías visibles y en la tabla. (No añadido)
     <div class="container">
         <table class="table table-striped">
             <thead class="thead-dark">
@@ -95,6 +96,38 @@
                 </td>
                 <td th:text="${articulo.fecha}">
                     <input type="hidden" id="fecha" name="fecha" th:field="*{fecha}">
+                    <! -- <input type="number" id="fecha" name="fecha" th:field="*{fecha}"> -- >
+                </td>
+                <td>
+                    <a class="btn btn-primary" th:href="'/detalle/' + ${articulo.id}">Ver artículo completo</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    -->
+
+    <!-- Así supermejorado. Con las Categorías visibles y en la tabla (añadido) -->
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Título de los artículos:</th>
+                <th scope="col">Categoría:</th>
+                <th scope="col">Fecha de edición:</th>
+                <th scope="col">Detalles del artículo:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="articulo : ${listaArticulos}">
+                <td>
+                    <a th:href="'/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
+                </td>
+
+                <td th:href="'/detalle/' + ${articulo.id}" th:text="${articulo.categoria}"></td>
+
+                <td th:text="${articulo.fecha}">
+                    <input type="hidden" id="fecha" name="fecha" th:field="*{fecha}">
                     <!-- <input type="number" id="fecha" name="fecha" th:field="*{fecha}"> -->
                 </td>
                 <td>
@@ -105,10 +138,12 @@
         </table>
     </div>
 
+
+
     <br/>
     <br/>
     <h3>Enlaces útiles y apartados </h3>
-    <p>Guía del blog elRinconDeLectura </p>
+    <p>Guía del blog elRinconDeLectura.</p>
 
     <!--
     <div class="col col-2">
