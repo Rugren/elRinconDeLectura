@@ -39,17 +39,18 @@
 
     <br/>
 
+    <!-- Así cuando lo tenía cutre, al inicio que fui probando
     <div class="container">
         <p> <u>Título de los artículos:</u> </p>
         <div class="row" th:each="articulo:${listaArticulos}">
-            <!-- Lo que escriba en esta línea lo hace en bucle. -->
+            < !-- Lo que escriba en esta línea lo hace en bucle. -- >
             <div class="col col-8" th:text="${articulo.titulo}">
                 <a th:href=" '/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
             </div>
             <div class="col col-2" th:text="${articulo.fecha}">
 
                 <input type="hidden" id="fecha" name="fecha" th:field="*{fecha}">
-                <!-- <input type="number" id="fecha" name="fecha" th:field="*{fecha}"> -->
+                < !-- <input type="number" id="fecha" name="fecha" th:field="*{fecha}"> -- >
 
             </div>
 
@@ -57,6 +58,33 @@
                 <a th:href=" '/detalle/' + ${articulo.id}">Ver artículo completo</a>
             </div>
         </div>
+    </div>
+-->
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Título de los artículos:</th>
+                <th scope="col">Fecha de edición:</th>
+                <th scope="col">Detalles del artículo:</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="articulo : ${listaArticulos}">
+                <td>
+                    <a th:href="'/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
+                </td>
+                <td th:text="${articulo.fecha}">
+                    <input type="hidden" id="fecha" name="fecha" th:field="*{fecha}">
+                    <!-- <input type="number" id="fecha" name="fecha" th:field="*{fecha}"> -->
+                </td>
+                <td>
+                    <a class="btn btn-primary" th:href="'/detalle/' + ${articulo.id}">Ver artículo completo</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
     <br/>
