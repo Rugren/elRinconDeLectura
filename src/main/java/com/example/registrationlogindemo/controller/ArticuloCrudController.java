@@ -59,6 +59,10 @@ public class ArticuloCrudController {
         // Crea solo la fecha con la hora y la hora para el otro campo de la BD. Pero si tengo que ponerlo en /modificar/submit de abajo.
 
         System.out.println(file.getOriginalFilename()); // Te dice el nombre original de la img, sale por consola.
+
+        // Necesario ponerlo para que me guarde la Id en la imagen (antes del if, y antes de return)
+        articuloService.save(articulo);
+
         // esto para que si el archivo está vacío, que nos coja la imagen que teníamos.
         if(!file.isEmpty()){
             String imagen = storageService.store(file, String.valueOf(articulo.getId()));
