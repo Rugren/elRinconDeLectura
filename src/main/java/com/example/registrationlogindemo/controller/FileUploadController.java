@@ -52,7 +52,7 @@ public class FileUploadController {
         String uniqueFileName = UUID.randomUUID().toString() + "_" + originalFileName;
         storageService.store(file, uniqueFileName);
         redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + originalFileName + "!");
+                "Lo has subido correctamente " + originalFileName + "!");
         return "redirect:/subirarchivo";
     }
 
