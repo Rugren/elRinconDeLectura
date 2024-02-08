@@ -19,12 +19,29 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- Así normales
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/register}">Registrarse</a>
+          <a class="nav-link active bg-success text-dark" aria-current="page" th:href="@{/register}">Registrarse</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
+          <a class="nav-link active bg-info text-dark" aria-current="page" th:href="@{/login}">Iniciar Sesión</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active bg-danger text-dark" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
+        </li> -->
+
+        <!-- Con efecto que al pasar el ratón por encima se mueva, y con recuadro de color amarillo -->
+        <li class="nav-item">
+          <a class="nav-link active bg-success text-dark hoverable border border-warning" aria-current="page" th:href="@{/register}">Registrarse</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active bg-info text-dark hoverable border border-warning" aria-current="page" th:href="@{/login}">Iniciar Sesión</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active bg-danger text-dark hoverable border border-warning" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
+        </li>
+
       </ul>
     </div>
   </div>
@@ -34,7 +51,7 @@
 
 <div class="container">
 <h1>Bienvenido al Blog elRinconDeLectura ✍</h1>
-  <div/>
+</div>
 
 <br/>
 
@@ -43,9 +60,9 @@
 <p>¡Anímate y crea un artículo tú mismo!
 <a th:href="@{/crud/articulos/altas}" class="btn btn-primary">👉 Crea tu propio Artículo</a>
 </p>
-  <div/>
+</div>
 
-  <br/>
+<br/>
 
 <div class="container">
 

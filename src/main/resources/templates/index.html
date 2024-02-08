@@ -20,12 +20,29 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <!-- Así normales
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/register}">Registrarse</a>
+                  <a class="nav-link active bg-success text-dark" aria-current="page" th:href="@{/register}">Registrarse</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
+                  <a class="nav-link active bg-info text-dark" aria-current="page" th:href="@{/login}">Iniciar Sesión</a>
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link active bg-danger text-dark" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
+                </li> -->
+
+                <!-- Con efecto hoverable para que los elementos se muevan cuando se pase el ratón por encima (pero no funciona), y border border-warning para agregar un marco amarillo claro a cada recuadro.-->
+                <li class="nav-item">
+                    <a class="nav-link active bg-success text-dark hoverable border border-warning" aria-current="page" th:href="@{/register}">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active bg-info text-dark hoverable border border-warning" aria-current="page" th:href="@{/login}">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active bg-danger text-dark hoverable border border-warning" aria-current="page" th:href="@{/logout}">Cerrar sesión</a>
+                </li>
+
             </ul>
 
         </div>
