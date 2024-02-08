@@ -34,7 +34,8 @@
 
 <div class="container">
 <h1>Bienvenido al Blog elRinconDeLectura ✍</h1>
-  <div/>
+</div>
+
 <br/>
 
 <div class="container">
@@ -42,22 +43,23 @@
 <p>¡Anímate y crea un artículo tú mismo!
 <a th:href="@{/crud/articulos/altas}" class="btn btn-primary">👉 Crea tu propio Artículo</a>
 </p>
-  <div/>
+</div>
+
+<br/>
 
 <div class="container">
 
-  <u><h4>Título de los artículos</h4></u>
-
-    <br/>
+  <u><h4>ARTÍCULOS</h4></u>
 
   <!-- Cambiado el listaArticulos por losArticulosCreados (ver ambos en el HomeController y darme cuenta) -->
   <div class="row" th:each="articulo:${losArticulosCreados}">
 
     <strong>
-    <div class="col col-8" th:text="${articulo.titulo}">
-      <a th:href=" '/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
-    </div>
-    <strong>
+      <div class="col col-8" th:text="${articulo.titulo}">
+        <a th:href=" '/detalle/' + ${articulo.id}" th:text="${articulo.titulo}"></a>
+      </div>
+    </strong>
+
 
     <p class="col col-2" th:text="${articulo.fecha}">
       <input type="hidden" id="fecha" name="fecha" th:field="*{fecha}">
@@ -72,6 +74,7 @@
     <div class="col col-2">
       <a th:href=" '/detalle/' + ${articulo.id}">Ver más</a>
     </div>
+
   </div>
 </div>
 
