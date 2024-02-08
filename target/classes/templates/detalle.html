@@ -35,46 +35,50 @@
 
 <div class="container">
   <h1 th:text="${articulo.titulo}"></h1>
+  <h6 th:text="${articulo.fecha}"></h6>
   <p th:text="${articulo.contenido}"></p>
-  <p th:text="${articulo.fecha}"></p>
 
+  <!-- Mostrar la imagen después del contenido: -->
   <div>
     <p><img th:src="${articulo.imagen}"></p>
   </div>
 
+  <!-- Así estaba al principio, creo que no iba bien, mejorado abajo
   <form th:action=" '/comentario/altas/' + ${articulo.id}" method="post" th:object="${comentario}">
     <textarea></textarea>
   </form>
+  -->
 
   <!-- 1º comprueba si estamos logeados para poder comentar
   si el usuario está registrado podrá comentar -->
   <div th:if="${usuarioAutenticado != null}">
     <div class="card mb-3">
       <div class="card-body">
-        <h5 class="card-title">Deja un comentario</h5>
+        <h5 class="card-title">¿Te ha gustado el post? Pues déjale tu opinión</h5>
         <form th:action="@{/detalle/submit}" method="post" th:object="${comentario}">
+
           <div class="form-group">
-            <label for="contenido">Contenido del comentario</label>
+            <label for="contenido">Escribe aquí tu comentario:</label>
             <textarea class="form-control" id="contenido" name="contenido" rows="3" th:field="*{contenido}"></textarea>
           </div>
           <input type="hidden" id="idArticulo" name="idArticulo" th:value="${articulo.id}">
           <input type="hidden" id="autorId" name="autorId" th:value="${usuarioAutenticado.id}" />
-          <button type="submit" class="btn btn-primary">Enviar comentario</button>
+          <button type="submit" class="btn btn-primary">¡Manda tu comentario! 👏</button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- (No muestra el nombre usuario) Div hecho para mostrar los comentarios dentro de los artículos
+  <!-- (Así NO muestra el nombre usuario) Div hecho para mostrar los comentarios dentro de los artículos
   <div class="card mb-3">
     <div class="card-body">
       <h3 class="card-title">Comentarios:</h3>
-      <! -- Iterar sobre la lista de comentarios -- >
+      <! -- Recorrer la lista de comentarios -- >
       <div th:each="comentario : ${listadoComentario}">
         <div class="mb-3">
-          < !-- Mostrar el nombre del usuario que creó el comentario -- >
+          < !-- para mostrar el nombre del usuario que creó el comentario -- >
           <h6 class="card-subtitle mb-2 text-muted" th:text="${comentario.autor}"></h6>
-          < !-- Mostrar el contenido del comentario -- >
+          < !-- para mostrar el contenido del comentario -- >
           <p class="card-text" th:text="${comentario.contenido}"></p>
         </div>
       </div>
@@ -82,18 +86,20 @@
   </div>
 -->
 
-  <!-- (Muestra el nombre usuario) Div hecho para mostrar los comentarios dentro de los artículos -->
+  <!-- (Así SI muestra el nombre usuario) Div hecho para mostrar los comentarios dentro de los artículos -->
   <div class="card mb-3">
     <div class="card-body">
       <h3 class="card-title">Comentarios</h3>
-      <!-- Iterar sobre la lista de comentarios -->
+      <!-- Recorrer la lista de comentarios -->
       <div th:each="comentario, commentIndex : ${listadoComentario}">
+
         <div class="mb-3">
-          <!-- Mostrar el nombre del usuario que creó el comentario -->
+          <!-- para mostrar el nombre del usuario que creó el comentario -->
           <h6 class="card-subtitle mb-2 text-muted" th:text="${nombreYApellidos[commentIndex.index]}"></h6>
-          <!-- Mostrar el contenido del comentario -->
+          <!-- para mostrar el contenido del comentario -->
           <p class="card-text" th:text="${comentario.contenido}"></p>
         </div>
+
       </div>
     </div>
   </div>
