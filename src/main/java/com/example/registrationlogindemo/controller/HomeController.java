@@ -37,7 +37,7 @@ public class HomeController {
     }
 
 
-    /* Así estaba antes del hecho de los comentarios:
+    /* Así estaba hecho antes de crear los comentarios:
     @GetMapping("/detalle/{id}")
     public String detalle(@PathVariable long id, Model model){
         model.addAttribute("articulo", articuloService.findById(id));
@@ -45,22 +45,22 @@ public class HomeController {
         return "detalle";
     } */
 
-    // @GetMapping("/detalle/{id}") y @PostMapping("/detalle/submit") T0DO esto sería para que nos guarde los comentarios.
+    // @GetMapping("/detalle/{id}") y @PostMapping("/detalle/submit") t0do esto sería para que nos guarde los comentarios.
     // @PostMapping("/detalle/submit") este creado.
     @GetMapping("/detalle/{id}")
     public String detalle(@PathVariable long id, Model model, Principal principal) {
         // Verifica si el usuario está autenticado
         if (principal != null) {
-            // Obtén el nombre de usuario del usuario autenticado
+            // Coge el nombre de usuario del usuario ya logeado
             String username = principal.getName();
             // Encuentra al usuario autenticado por su email (o id, según lo que estés utilizando para autenticar al usuario)
             User usuarioAutenticado = userService.findByEmail(username); // O userService.findById(id) si estás usando el id para autenticar
             // Agrega el usuario autenticado al modelo
             model.addAttribute("usuarioAutenticado", usuarioAutenticado);
         }
-        // Agrega el artículo al modelo
+        // Aquí nos agrega el artículo al modelo
         model.addAttribute("articulo", articuloService.findById(id));
-        // Agrega un nuevo comentario al modelo
+        // Aquí nos agrega un nuevo comentario al modelo
         model.addAttribute("comentario", new Comentario());
 
 
@@ -71,10 +71,10 @@ public class HomeController {
         model.addAttribute("listadoComentario", listadoComentario);
 
 
-        // Para mostrar los NOMBRES Y APELLIDOS de los usuarios: Almacenamos en una lista para los nombres de usuario
-        // el nombreYApellidos poner bien en detalle.html
+        // Para mostrar los NOMBRES Y APELLIDOS de los usuarios: Almacenamos en una lista para los nombres y apellidos del usuario.
+        // el nombreYApellidos poner bien enlazado en detalle.html para que funcione
         List<String> nombreYApellidos = new ArrayList<>();
-        // Para cada comentario, cogemos el nombre del usuario que lo creó y lo agrega a la lista
+        // Para cada comentario, cogemos el nombre y apell. del usuario que lo creó y lo agrega a la lista
         for (Comentario comentario : listadoComentario) { // el listadoComentario es el de antes (Para mostrar los comentarios)
             String nombreUsuario = comentario.getAutor().getName(); // Obtenemos el nombre del usuario asociado al comentario
             nombreYApellidos.add(nombreUsuario); // Agregar el nombre del usuario a la lista
@@ -82,26 +82,23 @@ public class HomeController {
         // Agregar el ArrayListla de lista de nombres de usuario al modelo
         model.addAttribute("nombreYApellidos", nombreYApellidos);
 
-
-        // Devuelve la vista "detalle"
         return "detalle";
     }
 
     @PostMapping("/detalle/submit")
     public String guardarComentario(@ModelAttribute("comentario") Comentario comentario, @RequestParam("idArticulo") Long idArticulo, @RequestParam("autorId") Long autorId) {
-        // Establecer el artículo del comentario
+        // Pone el artículo del comentario
         Articulo articulo = articuloService.findById(idArticulo); // Suponiendo que tienes un servicio de artículos con un método findById
         comentario.setArticulo(articulo);
 
-        // Establecer el autor del comentario si es necesario
-        User autor = userService.findById(autorId); // Suponiendo que tienes un servicio de usuarios con un método findById
+        // Pone el autor del comentario
+        User autor = userService.findById(autorId); // Si ya tenemos un servicio de usuarios con un método findById (que ya está creado, sino crear)
         comentario.setAutor(autor);
 
         // Guardar el comentario
         comentarioService.save(comentario);
 
-        // Redirigir a la página de detalle del artículo
-        return "redirect:/detalle/" + idArticulo; // Suponiendo que "/detalle/" es el endpoint correcto para la página de detalle
+        return "redirect:/detalle/" + idArticulo;
     }
 
 
